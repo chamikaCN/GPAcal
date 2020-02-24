@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './module_adder.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -15,50 +17,8 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('GPA cal'),
         ),
-        body: GPAhome(),
+        body: ModuleAdder(),
       ),
-    );
-  }
-}
-
-class GPAhome extends StatefulWidget {
-  @override
-  _GPAhomeState createState() => _GPAhomeState();
-}
-
-class _GPAhomeState extends State<GPAhome> {
-  String creditValue = '1.0';
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            DropdownButton<String>(
-              value: creditValue,
-              onChanged: (newvalue) {
-                setState(() {
-                  creditValue = newvalue;
-                });
-              },
-              items: <String>['1.0', '2.0', '3.0', '4.0']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            DropdownButton(items: null, onChanged: null),
-            RaisedButton(child: Text('Add'), onPressed: () {}),
-          ],
-        ),
-      ],
     );
   }
 }
