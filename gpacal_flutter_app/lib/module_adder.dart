@@ -17,8 +17,10 @@ class ModuleAdder extends StatefulWidget {
     'F': 0.0
   };
 
-  final List<double> total = [];
+  final List<double> total;
+  double totalCredits;
 
+  ModuleAdder(this.total,this.totalCredits);
   @override
   State<StatefulWidget> createState() {
     return _ModuleAdderState();
@@ -27,87 +29,69 @@ class ModuleAdder extends StatefulWidget {
 
 class _ModuleAdderState extends State<ModuleAdder> {
   String creditValue = '1.0', grade = 'A+';
-  double sgpa = 0.0, totCred = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            DropdownButton<String>(
-              value: creditValue,
-              onChanged: (newvalue) {
-                setState(() {
-                  creditValue = newvalue;
-                });
-              },
-              items: <String>['1.0', '2.0', '3.0', '4.0']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            DropdownButton<String>(
-              value: grade,
-              onChanged: (newGrade) {
-                setState(() {
-                  grade = newGrade;
-                });
-              },
-              items: <String>[
-                'A+',
-                'A',
-                'A-',
-                'B+',
-                'B',
-                'B-',
-                'C+',
-                'C',
-                'C-',
-                'D',
-                'I-ca',
-                'I-we',
-                'F'
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            RaisedButton(
-                child: Text('Add'),
-                onPressed: () {
-                  setState(() {
-                    totCred += double.parse(creditValue);
-                    widget.total
-                        .add(double.parse(creditValue) * widget.grades[grade]);
-                  });
-                }),
-          ],
-        ),
-        RaisedButton(
-          onPressed: () {
+        DropdownButton<String>(
+          value: creditValue,
+          onChanged: (newvalue) {
             setState(() {
-              double sum = 0;
-              widget.total.forEach((double e) {
-                sum += e;
-              });
-              sgpa = sum / totCred;
+              creditValue = newvalue;
             });
           },
-          child: Text('Calculate'),
+          items: <String>['1.0', '2.0', '3.0', '4.0']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
         ),
-        Text(widget.total.toString()),
-        Text('your SGPA is ' + sgpa.toString()),
+        DropdownButton<String>(
+          value: grade,
+          onChanged: (newGrade) {
+            setState(() {
+              grade = newGrade;
+            });
+          },
+          items: <String>[
+            'A+',
+            'A',
+            'A-',
+            'B+',
+            'B',
+            'B-',
+            'C+',
+            'C',
+            'C-',
+            'D',
+            'I-ca',
+            'I-we',
+            'F'
+          ].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+        RaisedButton(
+            child: Text('Add'),
+            onPressed: () {
+              setState(() {
+                widget.totalCredits += double.parse(creditValue);
+                widget.total
+                    .add(double.parse(creditValue) * widget.grades[grade]);
+              });
+            }),
+            Text(widget.totalCredits.toString()),
       ],
     );
   }
 }
+
+//TODO: push the change of the total credits of module adder into parent components
