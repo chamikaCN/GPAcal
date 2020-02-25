@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './module_adder.dart';
+import './sgpa_calculator.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('GPA cal'),
         ),
-        body: ModuleAdder(),
+        body: SGPACalculator(),
       ),
     );
   }
