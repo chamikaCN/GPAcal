@@ -17,10 +17,9 @@ class ModuleAdder extends StatefulWidget {
     'F': 0.0
   };
 
-  final List<double> total;
-  double totalCredits;
+  final Function updateValues;
 
-  ModuleAdder(this.total,this.totalCredits);
+  ModuleAdder(this.updateValues);
   @override
   State<StatefulWidget> createState() {
     return _ModuleAdderState();
@@ -82,13 +81,10 @@ class _ModuleAdderState extends State<ModuleAdder> {
         RaisedButton(
             child: Text('Add'),
             onPressed: () {
-              setState(() {
-                widget.totalCredits += double.parse(creditValue);
-                widget.total
-                    .add(double.parse(creditValue) * widget.grades[grade]);
-              });
+              widget.updateValues(
+                  double.parse(creditValue) * widget.grades[grade],
+                  double.parse(creditValue));
             }),
-            Text(widget.totalCredits.toString()),
       ],
     );
   }
