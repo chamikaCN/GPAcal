@@ -35,6 +35,8 @@ class _SGPACalculatorState extends State<SGPACalculator> {
               });
               sgpa = sum / totCred;
             });
+            widget.total.clear();
+            totCred = 0.0;
           },
           child: Text('Calculate'),
         ),
