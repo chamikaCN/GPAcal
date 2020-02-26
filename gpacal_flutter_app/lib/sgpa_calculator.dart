@@ -14,13 +14,18 @@ class SGPACalculator extends StatefulWidget {
 class _SGPACalculatorState extends State<SGPACalculator> {
   double sgpa = 0.0, totCred = 0.0;
 
+  void _updateValues(double product, double credit) {
+    totCred += credit;
+    widget.total.add(product);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        ModuleAdder(widget.total, totCred),
+        ModuleAdder(_updateValues),
         RaisedButton(
           onPressed: () {
             setState(() {
