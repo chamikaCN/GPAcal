@@ -38,9 +38,11 @@ class _SGPACalculatorState extends State<SGPACalculator> {
           },
           child: Text('Calculate'),
         ),
-        Text(widget.total.toString()),
-        Text(totCred.toString()),
-        Text('your SGPA is ' + sgpa.toString()),
+        Text.rich(TextSpan(text: 'your SGPA is  ', children: <TextSpan>[
+          TextSpan(
+              text: '$sgpa',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0))
+        ])),
       ],
     );
   }
