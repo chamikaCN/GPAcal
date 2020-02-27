@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './module_adder.dart';
+import './details_collector.dart';
 
 class SGPACalculator extends StatefulWidget {
   final List<double> total = [];
@@ -25,6 +26,7 @@ class _SGPACalculatorState extends State<SGPACalculator> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        DetailsCollector(),
         ModuleAdder(_updateValues),
         RaisedButton(
           onPressed: () {
@@ -42,7 +44,7 @@ class _SGPACalculatorState extends State<SGPACalculator> {
         ),
         Text.rich(TextSpan(text: 'your SGPA is  ', children: <TextSpan>[
           TextSpan(
-              text: '$sgpa',
+              text: sgpa.toStringAsFixed(2),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0))
         ])),
       ],
